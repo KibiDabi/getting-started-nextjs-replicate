@@ -132,7 +132,7 @@ export default function SharedModal({
                     title="Open fullsize version"
                     rel="noreferrer"
                   >
-                    <Twitter className="h-5 w-5" />
+                    {/* <Twitter className="h-5 w-5" /> */}
                   </a>
                 )}
                 <button
