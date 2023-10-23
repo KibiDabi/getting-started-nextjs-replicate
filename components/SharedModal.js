@@ -12,7 +12,7 @@ import { useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import { range } from "../utils/range";
 import downloadPhoto from "../utils/downloadPhoto";
-import variants from "../utils/animationVariants";
+import { variants } from "../utils/animationVariants";
 
 export default function SharedModal({
   index,
