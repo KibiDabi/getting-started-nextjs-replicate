@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
   reactStrictMode: true,
   images: {
+    domains: ["pbxt.replicate.delivery", "res.cloudinary.com"],
+    minimumCacheTTL: 31536000,
     remotePatterns: [
       {
         protocol: "https",
@@ -12,7 +14,6 @@ const nextConfig = {
         hostname: "replicate.delivery",
       },
     ],
+    formats: ["image/avif", "image/webp"],
   },
 };
-
-module.exports = nextConfig;

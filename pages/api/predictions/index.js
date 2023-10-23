@@ -10,21 +10,29 @@ export default async function handler(req, res) {
       "The REPLICATE_API_TOKEN environment variable is not set. See README.md for instructions on how to set it."
     );
   }
+  // Log the incoming request body
+  console.log("Incoming Request Body:", req.body);
 
   const prediction = await replicate.predictions.create({
     // Pinned to a specific version of Stable Diffusion
     // See https://replicate.com/stability-ai/sdxl
-    version: "2b017d9b67edd2ee1401238df49d75da53c523f36e363881e057f5dc3ed3c5b2",
+    version: "1bfb924045802467cf8869d96b231a12e6aa994abfe37e337c63a4e49a8c6c41",
 
     // This is the text prompt that will be submitted by a form on the frontend
     input: { prompt: req.body.prompt },
   });
 
   if (prediction?.error) {
+    // Log the prediction error
+    console.log("Prediction Error:", prediction.error);
+
     res.statusCode = 500;
     res.end(JSON.stringify({ detail: prediction.error }));
     return;
   }
+
+  // Log the prediction
+  console.log("Prediction:", prediction);
 
   res.statusCode = 201;
   res.end(JSON.stringify(prediction));
