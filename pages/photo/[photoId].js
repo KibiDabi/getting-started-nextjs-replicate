@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import getResults from "../../utils/cachedPhotos";
 import getBase64ImageUrl from "../../utils/generateBlurPlaceholder";
@@ -10,9 +11,16 @@ const Photos = (currentPhoto) => {
   let index = Number(photoId);
 
   return (
-    <main className="mx-auto max-w-[1960px] p-4">
-      <Carousel currentPhoto={currentPhoto} index={index} />
-    </main>
+    <>
+      <Head>
+        <title>pictureGPT</title>
+        <meta property="og:image" content={currentPhoto} />
+        <meta name="twitter:image" content={currentPhoto} />
+      </Head>
+      <main className="mx-auto max-w-[1960px] p-4">
+        <Carousel currentPhoto={currentPhoto} index={index} />
+      </main>
+    </>
   );
 };
 
@@ -37,6 +45,13 @@ export async function getStaticProps(context) {
   const currentPhoto = reducedResults.find((photo) => {
     photo.id === Number(context.params.photoId);
   });
+
+  if (!currentPhoto) {
+    // Handle the case when the photo with the specified id is not found
+    return {
+      notFound: true,
+    };
+  }
 
   currentPhoto.blurDataUrl = await getBase64ImageUrl(currentPhoto);
 
