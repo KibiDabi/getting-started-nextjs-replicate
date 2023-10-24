@@ -4,6 +4,11 @@ import imageminJpegtran from "imagemin-jpegtran";
 const cache = new Map();
 
 export default async function getBase64ImageUrl(image) {
+  if (!image || !image.public_id || !image.format) {
+    console.error("Invalid image data:", image);
+    return null;
+  }
+
   let url = cache.get(image);
 
   if (url) {
