@@ -5,12 +5,6 @@ const replicate = new Replicate({
 });
 
 export default async function handler(req, res) {
-  // Set CORS headers to allow requests from your Vercel app's domain
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://picture-n82lktztf-kibidabi.vercel.app"
-  );
-
   const prediction = await replicate.predictions.get(req.query.id);
 
   if (prediction?.error) {

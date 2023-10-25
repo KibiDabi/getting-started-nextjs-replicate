@@ -13,12 +13,6 @@ export default async function handler(req, res) {
   // Log the incoming request body
   console.log("Incoming Request Body:", req.body);
 
-  // Set CORS headers to allow requests from your Vercel app's domain
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://picture-n82lktztf-kibidabi.vercel.app"
-  );
-
   const prediction = await replicate.predictions.create({
     // Pinned to a specific version of Stable Diffusion
     // See https://replicate.com/stability-ai/sdxl
