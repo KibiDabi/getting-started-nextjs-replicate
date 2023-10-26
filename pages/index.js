@@ -12,14 +12,13 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/predictions", {
-      method: "POST",
+    const response = await axios.post("/api/predictions", {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ prompt: e.target.prompt.value }),
+      prompt: e.target.prompt.value,
     });
-    let prediction = await response.json();
+    let prediction = await response.data;
     console.log(prediction);
     if (response.status !== 201) {
       setError(prediction.detail);
@@ -32,8 +31,8 @@ export default function Home() {
       prediction.status !== "failed"
     ) {
       await sleep(1000);
-      const response = await fetch("/api/predictions/" + prediction.id);
-      prediction = await response.json();
+      const response = await axios.get("/api/predictions/" + prediction.id);
+      prediction = await response.data;
       if (response.status !== 200) {
         setError(prediction.detail);
         return;
