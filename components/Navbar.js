@@ -75,7 +75,7 @@ export default function Navbar() {
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <Link
-                  href="https://github.com/KibiDabi/getting-started-nextjs-replicate"
+                  href="https://github.com/KibiDabi/pictureGPT"
                   className="group"
                 >
                   <svg

@@ -12,15 +12,13 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post(
-      "https://picture-2hmi6j7hv-kibidabi.vercel.app/api/predictions",
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        prompt: e.target.prompt.value,
-      }
-    );
+    const response = await axios.post("/api/predictions", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
+      },
+      prompt: e.target.prompt.value,
+    });
     let prediction = await response.data;
     console.log(prediction);
     if (response.status !== 201) {
@@ -34,10 +32,7 @@ export default function Home() {
       prediction.status !== "failed"
     ) {
       await sleep(1000);
-      const response = await axios.get(
-        "https://picture-2hmi6j7hv-kibidabi.vercel.app/api/predictions/" +
-          prediction.id
-      );
+      const response = await axios.get("/api/predictions/" + prediction.id);
       prediction = await response.data;
       if (response.status !== 200) {
         setError(prediction.detail);
