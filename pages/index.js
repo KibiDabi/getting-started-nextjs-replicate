@@ -4,7 +4,8 @@ import Image from "next/image";
 import axios from "axios";
 import Header from "../components/Navbar";
 
-const sleep = (ms) => new Promise((resolveFn) => setTimeout(resolveFn, ms));
+const sleep = (delay) =>
+  new Promise((resolveFn) => setTimeout(resolveFn, delay));
 
 export default function Home() {
   const [prediction, setPrediction] = useState(null);
